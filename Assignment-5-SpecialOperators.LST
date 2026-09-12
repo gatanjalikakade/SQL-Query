@@ -1,0 +1,974 @@
+SQL> 
+SQL> set pages 100 lines 100
+SQL> 
+SQL> --1] write a query to display details of the employees who are working in department no 10,20?
+SQL> 
+SQL> s=SELECT *
+SP2-0042: unknown command "s=SELECT *" - rest of line ignored.
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO IN(10,20);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --2] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE WORKING AS MANAGER,ANALYST?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN('MANAGER', 'ANALYST');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --3]WRITE A QUERY TO DISPLAY DETAILSOF THE EMPLOYEES WHO ARE WORKING AS SALESMAN, MANAGER IN DEPARTMENT NO 30 ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN('SALESMAN', 'MANAGER') AND DEPTNO=20;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --4] WRITE A QUERY TO DISPLAY EMPLOYEE NAME , DEPARTMENT NO OF THE EMPLOYEE WHO ARE WORKING IN DEPARTMENT NO 30?
+SQL> 
+SQL> SELECT ENAME,DEPTNO
+  2  FROM EMP
+  3  WHERE DEPTNO IN 30;
+
+ENAME          DEPTNO                                                                               
+---------- ----------                                                                               
+ALLEN              30                                                                               
+WARD               30                                                                               
+MARTIN             30                                                                               
+BLAKE              30                                                                               
+TURNER             30                                                                               
+JAMES              30                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --5] WRITE A QUERY TO DISPLAY DETAILS OF EMPLOYEES WHO ARE NOT WORKING IN THE DEPARTMENT NO 10,20?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO NOTIN(10,20);
+WHERE DEPTNO NOTIN(10,20)
+             *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN (10,20);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --6] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE NOT WORKING AS ANALYST ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB NOT IN 'ANALYST';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+12 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --7] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE NOT HAVING REPORTING MANAGER(MGR
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MGR IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --8] WRITE A QUERY TO DISPLAY DETALIS OF THE EMPLOYEES WHO ARE NOT GETTING COMMISION?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE COMM IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+10 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE GETTING COMMISION ?
+SP2-0734: unknown command beginning "WRITE A QU..." - rest of line ignored.
+SQL> 
+SQL> 
+SQL> --WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE GETTING COMMISION ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --10] WRITE A QUERY TO DISPLAY NAME AND SALARY OF THE EMPLOYEES WHO ARE GETTING SALARY ?
+SQL> 
+SQL> SELECT NAME, SAL
+  2  FROM EMP
+  3  WHERE SAL IS NOT NULL;
+SELECT NAME, SAL
+       *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier 
+
+
+SQL> SLECT ENAME, SAL
+SP2-0734: unknown command beginning "SLECT ENAM..." - rest of line ignored.
+SQL> FROM EMP
+SP2-0042: unknown command "FROM EMP" - rest of line ignored.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  WHERE SAL IS NOT NULL;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+SMITH             800                                                                               
+ALLEN            1600                                                                               
+WARD             1250                                                                               
+JONES            2975                                                                               
+MARTIN           1250                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+SCOTT            3000                                                                               
+KING             5000                                                                               
+TURNER           1500                                                                               
+ADAMS            1100                                                                               
+JAMES             950                                                                               
+FORD             3000                                                                               
+MILLER           1300                                                                               
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --11] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE WORKING AS SALESMAN, MANAGER IN DETPARTMENT NO 10,20,30 AND THE EMPLOYEE WHO ARE GETTING SALARY MORE THAN 1000 AND THE EMPLOYEES WHO ARE HAVING REPORTING MANAGER AND NOT GETTING COMMISION ?
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) ANDSAL>1000 AND MGR IS NOT NULL AND COMM IS NULL;
+WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) ANDSAL>1000 AND MGR IS NOT NULL AND COMM IS NULL
+                                                           *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 
+SQL>  SELECT *
+  2   FROM EMP
+  3   WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) ANDSAL>1000 AND MGR IS NOT NULL AND
+  4  COMM IS NULL;
+ WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) ANDSAL>1000 AND MGR IS NOT NULL AND
+                                                            *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) ANDSAL>1000 AND MGR IS NOT NULL;
+WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) ANDSAL>1000 AND MGR IS NOT NULL
+                                                           *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN('SALESMAN','MANAGER') AND DEPTNO IN(10,20,30) AND SAL>1000 AND MGR IS NOT NULL AND COMM IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --12] WRITE A QUERY TO DISPLAY NAME AND SALARY OF THE EMPLOYEES WHO ARE GETTING SALARY IN THE RANGE OF 1000 TO 3000 ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME ,SAL
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 1000 AND 3000;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ALLEN            1600                                                                               
+WARD             1250                                                                               
+JONES            2975                                                                               
+MARTIN           1250                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+SCOTT            3000                                                                               
+TURNER           1500                                                                               
+ADAMS            1100                                                                               
+FORD             3000                                                                               
+MILLER           1300                                                                               
+
+11 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --13]WRITE A QUERY TO DISPLAY NAME AND SALARY OF THE EMPLOYEES WHO ARE GETTING SALARY IN THE RANGE BETWEEN 1300 TO 3000 ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME,SAL
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 1301 AND 2999;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ALLEN            1600                                                                               
+JONES            2975                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+TURNER           1500                                                                               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --14] WRITE A QUERY TO DISPLAY NAME AND SALARY OF THE EMPLOYEES WHO ARE GETTING SALARY IN THE RANGE BETWEEN 1500 TO 5000 ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME,SAL
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 1501 AND 4999;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ALLEN            1600                                                                               
+JONES            2975                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+SCOTT            3000                                                                               
+FORD             3000                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --15]WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE GETTING SALARY MORE THAN 1000 BUT LESS THAN 5000 ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 1001 AND 4999;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+11 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --16] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO HIRED IN THE RANGE OF 1981 TO1987 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE HIREDATE BETWEEN '01-JAN-1981' AND '31-DES-1987';
+WHERE HIREDATE BETWEEN '01-JAN-1981' AND '31-DES-1987'
+                                         *
+ERROR at line 3:
+ORA-01843: not a valid month 
+
+
+SQL>  SELECT *
+  2   FROM EMP
+  3   WHERE HIREDATE BETWEEN '01-JAN-1981' AND '31-DEC-1987';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+13 rows selected.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --17]WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE NOT GETTING SALARY IN THE RANGE OF 1000 TO 3000 ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL NOT BETWEEN 1000 AND 3000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --18] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEES WHOSE NAME STARTS WITH CHAR 'A' ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'A%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+ADAMS                                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --19] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEES WHOSE NA,E CONSIST OF A ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+ADAMS                                                                                               
+JAMES                                                                                               
+
+7 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --20] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHOSE NAME CONSIST OF 5 CHARACTORS ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE '-----';
+
+no rows selected
+
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE'_____';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+8 rows selected.
+
+SQL> 
+SQL> 
+SQL> --21] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHOSE NAME DOSE NOT START WITH CHAR A ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME NOT LIKE 'A%';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+12 rows selected.
+
+SQL> 
+SQL> 
+SQL> --22] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEES WHISE NAME STARTS WITH CHARACHTOR 'A' AND 'S' ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'A%' OR ENAME LIKE 'S%';
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+ALLEN                                                                                               
+SCOTT                                                                                               
+ADAMS                                                                                               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --23] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEES WHOSE NAME DOES NOT STARTS WITH CHAR 'A' AND 'S' ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE ENAME NOT LIKE 'A%' AND ENAME NOT LIKE 'S%';
+
+ENAME                                                                                               
+----------                                                                                          
+WARD                                                                                                
+JONES                                                                                               
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+KING                                                                                                
+TURNER                                                                                              
+JAMES                                                                                               
+FORD                                                                                                
+MILLER                                                                                              
+
+10 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> ---24] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEES WHOSE NAME STARTS WITH VOWELS ?
+SQL> 
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'A%' OR ENAME LIKE 'E%' OR ENAME LIKE 'O%' OR ENAME LIKE 'U%' OR ENAME LIKE 'I%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+ADAMS                                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --25] LIST ALL THE EMPLOYEES WHOSE COMMISION IS NULL ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE COMM IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+10 rows selected.
+
+SQL> 
+SQL> 
+SQL> ---------------------------------------------------------------------------------------------
+SQL> 
+SQL> --26] LIST ALL THE EMPLOYEES WHO DO NOT HAVE A REPORTING MANAGER ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MGR IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --17] LIST ALL YHE SALESMAN IN DEPT NO 30 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN' AND DEPTNO=30;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --28] LIST ALL THE SALESMAN IN DEPTNO 30 AND HAVING SALARY GREATER THAN 1500 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN' AND DEPTNO=30 AND SAL>1500;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --29] LIST ALL THE EMPLOYEES WHOSE NAME START WITH S OR A ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'S%' OR ENAME LIKE 'A%';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --30] LIST ALL THE EMPLOYEES EXCEPT THOSE WHO ARE WORKING IN DEPT NO 10 AND 20 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN(10,20);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+6 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --31] LIST ALL THE EMPLOYEES WHOSE NAME DOSE NOT START WITH S?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME NOT LIKE 'S%';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+12 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --32] LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGER IN DEPTNO 10 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MGR IS NOT NULL AND DEPTNO IN 10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --33] LIST ALL THE EMPLOYEES WHOSE COMMISION IS NULL AND WORKING AS CLERK ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE COMM IS NULL AND JOB IN 'CLERK';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --34]LIST ALL THE EMLOYEES WHO DO NOT HAVE REPORTING MANAGER IN DEPTNO 10 OR 30?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MGR IS NULL AND DEPTNO IN(10,20);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --35] LIST ALL SALESMAN IN DEPTNO 30 WITH SAL MORE THAN 2450 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN' AND DEPTNO IN 30 AND SAL >2450;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --36]LIST ALL THE ANALYST IN DEPTNO 20 AND HAVING SALARY GREATER THAN 2500 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'ANALYST' AND DEPTNO IN 20 AND SAL>2500;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --37] LIST ALL THE EMPLOYEES WHOSE NAME START WITH 'M' OR 'J' ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'M%' OR ENAME LIKE 'J%';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --38]LIST ALL THE EMPLOYEES WITH ANNUAL SALARY EXCEPT THOSE WHO ARE WORKING IN DEPTNO 30 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO IN 30;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+6 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --39] LIST ALL THE EMPLOYEES WHOSE NAME DOSE NOT END WITH 'ES' OR 'R' ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME NOT LIKE '%ES'
+  4  AND ENAME NOT LIKE '%R';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+
+10 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --40] LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGER IN DEPTNO 10 ALONG WITH 10% HIKE IN SALARY ?
+SQL> 
+SQL> 
+SQL> SELECT EMP.* , SAL+SAL*10/100
+  2  FROM EMP
+  3  WHERE MGR IS NOT NULL AND DEPTNO IN 10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO SAL+SAL*10/100
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- --------------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10           2695
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10           1430
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --41] DISPLAY ALL THE EMPLOYEE WHO ARE SALESMANS HAVING 'E' AS THE LAST BUT ONE ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN' AND ENAME LIKE '%E_';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --42] DISPLAY ALL THE EMPLOYEES WHO ARE JOINED IN FEB ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE HIREDATE LIKE '%FEB%';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --43] DISPLAY ALL THE EMPLOYEES WHO ARE JOINED AFTER YEAR 81 ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE HIREDATE >'31-DEC-81''
+  4  ;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE HIREDATE >'31-DEC-81';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --44] LIST THE EMPLOYEES WHO ARE NOT WORKING AS MANAGER AND CLERK IN DEPTNO 10 AND WITH A SALARY IN THE RANGE OF 1000 TO 3000 ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB NOT IN('MANAGER', 'CLERK') AND DEPTNO IN 10 AND SAL BETWEEN 1000 AND 3000;
+
+no rows selected
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --45] DISPLAY ALL THE EMPLOYEES WHO ARE SALESMAN HAVING 'E' AS THE LAST BUT ONE CHARACTER IN ENAME BUT SALARY HAVING EXACTLY 4 CHARACTER ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN' AND ENAME LIKE '%E_' AND SAL LIKE'____';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+
+SQL> 
+SQL> SPOOL OFF;
