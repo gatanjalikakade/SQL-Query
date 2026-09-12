@@ -1,0 +1,378 @@
+SQL> 
+SQL> 
+SQL> --1] write a query to display maximum salary of the employees ?
+SQL> 
+SQL> select max(sal)
+  2  from emp;
+
+  MAX(SAL)                                                                      
+----------                                                                      
+      5000                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --2]write a query to display minimum salary of the employees ?
+SQL> 
+SQL> select min(sal)
+  2  from emp;
+
+  MIN(SAL)                                                                      
+----------                                                                      
+       800                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --3]write a query to display total salary of the employees ?
+SQL> 
+SQL> select sum(sal)
+  2  from emp;
+
+  SUM(SAL)                                                                      
+----------                                                                      
+     29025                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --4] write a query to display avarage salary given to the employees ?
+SQL> 
+SQL> select avg(sal)
+  2  from emp;
+
+  AVG(SAL)                                                                      
+----------                                                                      
+2073.21429                                                                      
+
+SQL> 
+SQL> 
+SQL> ------------------------------------------------------------------------------------------------
+SQL> 
+SQL> --5] write a query to display a number of employees presenting employee table ?
+SQL> 
+SQL> select count(ename)
+  2  from emp;
+
+COUNT(ENAME)                                                                    
+------------                                                                    
+          14                                                                    
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --6] write a query to display number of employees getting salary less than 2000 in dept no 10 ?
+SQL> 
+SQL> select count(*)
+  2  from emp
+  3  where sal <2000 and deptno in 10;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --7] write a query to display total salary needed to pay employees working as clerk ?
+SQL> 
+SQL> select sum(sal)
+  2  from emp
+  3  where job in 'CLERK';
+
+  SUM(SAL)                                                                      
+----------                                                                      
+      4150                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --8] WRITE A QUERY TO DISPLAY AVERAGE SALARY NEEDED TO PAY ALL EMPLOYEES ?
+SQL> 
+SQL> SELECT AVG(SAL)
+  2  FROM EMP;
+
+  AVG(SAL)                                                                      
+----------                                                                      
+2073.21429                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --9]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES HAVING 'A' AS THEIR FIRST CHARACTER ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'A%' ;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         2                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --10]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WORKING AS CLERK OR MANAGER ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE JOB IN('CLERK','MANAGER');
+
+  COUNT(*)                                                                      
+----------                                                                      
+         7                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --11] WRITE A QUERY TO DISPLAY TOTAL SALARY NEEDED TO PAY EMPLOYEES HIRED IN FEB ?
+SQL> 
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  WHERE HIREDATE LIKE '%FEB%';
+
+  SUM(SAL)                                                                      
+----------                                                                      
+      2850                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --12]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES REPORTING TO 7839 (MGR) ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE MGR =7839;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         3                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --13]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES GETTING COMMISSION IN DEPT NO 30 ?
+SQL> 
+SQL> SELECT COUNT(*0
+  2  
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL AND DEPTNO IN 30;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         4                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --14]  WRITE A QUERY TO DISPLAY AVERAGE SALARY TOTAL SALARY NUMBER OF EMPLOYEES AND MAXIMUM SALARY GIVEN TO EMPLOYEES WHO WORKING AS PRESIDENT ?
+SQL> 
+SQL> 
+SQL> SELECT AVG(SAL), SUM(SAL), COUNT(*), MAX(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'PRESIDENT';
+
+  AVG(SAL)   SUM(SAL)   COUNT(*)   MAX(SAL)                                     
+---------- ---------- ---------- ----------                                     
+      5000       5000          1       5000                                     
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --15]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES HAVING 'A' IN THEIR NAMES ?
+SQL> 
+SQL> SELECT COUNT(ENAME)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%' ;
+
+COUNT(ENAME)                                                                    
+------------                                                                    
+           7                                                                    
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --16]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES AND TOTAL SALARY NEEDED TO PAY THE EMPLOYEES WHO HAVE 2 CONSICUTIVE A IN THEIR NAMES ?
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*), SUM(SAL)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%AA%';
+
+  COUNT(*)   SUM(SAL)                                                           
+---------- ----------                                                           
+         0                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --17] WRITE A QUERY TO DISPLAY NUMBER OF DEPARTMENTS PRESENT IN EMPLOYEES TABLE ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  
+SQL> 
+SQL> 
+SQL> SELECT COUNT (DISTINCT DEPTNO)
+  2  FROM EMP;
+
+COUNT(DISTINCTDEPTNO)                                                           
+---------------------                                                           
+                    3                                                           
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --18]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES HAVING CHARACTER 'z' IN THEIR NAMES ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%Z%';
+
+  COUNT(*)                                                                      
+----------                                                                      
+         0                                                                      
+
+SQL> 
+SQL> 
+SQL> --------------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> ---19]  WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES HAVING 'S' IN THEIR NAMES ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%s%;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%s%
+  4  ';
+
+  COUNT(*)                                                                      
+----------                                                                      
+         0                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --20] SELECT COUNT(*)
+SQL> FROM EMP
+SP2-0042: unknown command "FROM EMP" - rest of line ignored.
+SQL> WHERE ENAME LIKE '%s%
+SP2-0734: unknown command beginning "WHERE ENAM..." - rest of line ignored.
+SQL> :
+SP2-0042: unknown command ":" - rest of line ignored.
+SQL> 
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --20] WRITE A QUERY TO DISPLAY TOTAL SALARY GIVEN TO EMPLOYEES WORKING AS CLERK IN DEPTNO 30 ?
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE JOB IN 'CLERK' AND DEPTNO IN 30;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --21] WRITE A QUERY TO DISPLAY MAXIMUM SALARY GIVEN TO THE EMPLOYEES WORKING AS ANALYST ?
+SQL> 
+SQL> SELECT MAX(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'ANALYST';
+
+  MAX(SAL)                                                                      
+----------                                                                      
+      3000                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --22] WRITE A QUERY TO DISPLAY NUMBER OF DISTINCT SALARIES PRESENT IN EMPLOYEE TABLE ?
+SQL> 
+SQL> SELECT COUNT (DISTINCT SAL)
+  2  FROM EMP;
+
+COUNT(DISTINCTSAL)                                                              
+------------------                                                              
+                12                                                              
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --23] WRITE A QUERY TO DISPLAY NUMBER OF JOBS PRESENT IN EMPLOYEE TABLE ?
+SQL> 
+SQL> SELECT COUNT(DISTINCT JOB)
+  2  FROM EMP;
+
+COUNT(DISTINCTJOB)                                                              
+------------------                                                              
+                 5                                                              
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --24]WRITE A QUERY TO DISPLAY AVERAGE SALARY GIVEN TO THE CLERK ?
+SQL> 
+SQL> SELECT AVG(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN 'CLERK' ;
+
+  AVG(SAL)                                                                      
+----------                                                                      
+    1037.5                                                                      
+
+SQL> 
+SQL> 
+SQL> ----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --25]WRITE A QUERY TO DISPLAY MINIMUM SALARY GIVEN TO THE EMPLOYEES WHO WORK IN DEPT NO 10 AS MANAGER OR CLERK ?
+SQL> 
+SQL> 
+SQL> SELECT MIN(SAL)
+  2  FROM EMP
+  3  WHERE JOB IN ('MANAGER', 'CLERK') AND DEPTNO IN 10 ;
+
+  MIN(SAL)                                                                      
+----------                                                                      
+      1300                                                                      
+
+SQL> 
+SQL> 
+SQL> ------------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> 
+SQL> SPOOL OFF;
