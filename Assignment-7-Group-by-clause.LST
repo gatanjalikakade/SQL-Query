@@ -1,0 +1,295 @@
+SQL> 
+SQL> 
+SQL> --1] WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WHO ARE WORKING IN EACH JOB ?
+SQL> 
+SQL> SELECT COUNT(*),JOB
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+  COUNT(*) JOB                                                                                      
+---------- ---------                                                                                
+         4 CLERK                                                                                    
+         4 SALESMAN                                                                                 
+         1 PRESIDENT                                                                                
+         3 MANAGER                                                                                  
+         2 ANALYST                                                                                  
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --2]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WHO ARE GETTING SALARY MORE THAN 2000 ?
+SQL> 
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE SAL >2000;
+
+  COUNT(*)                                                                                          
+----------                                                                                          
+         6                                                                                          
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --3]WRITE A QUERY TO DISPLAY  NUMBER OF EMPLOYEES WHO HIRED AFTER 1980 IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT COUNT(*), DEPTNO
+  2  FROM EMP
+  3  WHERE HIREDATE >'31-DEC-1980'
+  4  GROUP BY DEPTNO;
+
+  COUNT(*)     DEPTNO                                                                               
+---------- ----------                                                                               
+         6         30                                                                               
+         4         20                                                                               
+         3         10                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --4]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WORKING IN EACH DEPARTMENT EXCEPT PRESIDENT ?
+SQL> 
+SQL> SELECT COUNT(*),DEPTNO
+  2  FROM EMP
+  3  WHERE JOB NOT IN 'PRESIDENT'
+  4  GROUP BY DETPNO;
+GROUP BY DETPNO
+         *
+ERROR at line 4:
+ORA-00904: "DETPNO": invalid identifier 
+
+
+SQL>  SELECT COUNT(*),DEPTNO
+  2   FROM EMP
+  3   WHERE JOB NOT IN 'PRESIDENT'
+  4  GROUP BY DEPTNO;
+
+  COUNT(*)     DEPTNO                                                                               
+---------- ----------                                                                               
+         6         30                                                                               
+         5         20                                                                               
+         2         10                                                                               
+
+SQL> 
+SQL> --5] SELECT COUNT(*),DEPTNO
+SQL>  FROM EMP
+SP2-0042: unknown command "FROM EMP" - rest of line ignored.
+SQL>  WHERE JOB NOT IN 'PRESIDENT'
+SP2-0734: unknown command beginning "WHERE JOB ..." - rest of line ignored.
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --5]WRITE A QUERY TO DISPLAY TOTAL SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH JOB ?
+SQL> 
+SQL> SELECT SUM(SAL) , JOB
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+  SUM(SAL) JOB                                                                                      
+---------- ---------                                                                                
+      4150 CLERK                                                                                    
+      5600 SALESMAN                                                                                 
+      5000 PRESIDENT                                                                                
+      8275 MANAGER                                                                                  
+      6000 ANALYST                                                                                  
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --6]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WORKING AS MANAGER IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT COUNT(*). DEPTNO
+  2  FROM EMP
+  3  WHERE JOB IN 'MANAGER'
+  4  GROUP BY DEPTNO;
+SELECT COUNT(*). DEPTNO
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT COUNT(*),DEPTNO
+  2  FROM EMP
+  3  WHERE JOB IN 'MANAGER'
+  4  GROUP BY DEPTNO;
+
+  COUNT(*)     DEPTNO                                                                               
+---------- ----------                                                                               
+         1         30                                                                               
+         1         20                                                                               
+         1         10                                                                               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --7]WRITE A QUERY TO DISPLAY AVERAGE SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH DEPARTMENT EXCLUDING THE EMPLOYEES OF DEPTNO 20 ?
+SQL> 
+SQL> 
+SQL> SELECT AVG(SAL),DEPTNO
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN 20
+  4  GROUP BY DEPTNO;
+
+  AVG(SAL)     DEPTNO                                                                               
+---------- ----------                                                                               
+1566.66667         30                                                                               
+2916.66667         10                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --8]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES HAVING CHARACTER 'A' IN THEIR NAMES IN EACH JOB ?
+SQL> 
+SQL> SELECT COUNT(*),JOB
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%'
+  4  GROUP BY JOB;
+
+  COUNT(*) JOB                                                                                      
+---------- ---------                                                                                
+         3 SALESMAN                                                                                 
+         2 CLERK                                                                                    
+         2 MANAGER                                                                                  
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --9]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES AND AVG SALARY NEEDED TO PAY THE EMPLOYEES WHOSE SALARY IN GREATER THAN 2000 IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT COUNT(*), AVG(SAL), DEPTNO
+  2  FROM EMP
+  3  WHERE SAL >2000
+  4  GROUP BY DEPTNO;
+
+  COUNT(*)   AVG(SAL)     DEPTNO                                                                    
+---------- ---------- ----------                                                                    
+         1       2850         30                                                                    
+         3 2991.66667         20                                                                    
+         2       3725         10                                                                    
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --10]WRITE A QUERY TO DISPLAY TOTAL SALARY NEEDED TO PAY AND NUMBER OF SALESMAN IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT SUM(SAL), DEPTNO
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN'
+  4  GROUP BY DEPTNO;
+
+  SUM(SAL)     DEPTNO                                                                               
+---------- ----------                                                                               
+      5600         30                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --11]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WITH THEIR MAXIMUM SALARIES IN EACH JOB ?
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*), MAX(SAL), JOB
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+  COUNT(*)   MAX(SAL) JOB                                                                           
+---------- ---------- ---------                                                                     
+         4       1300 CLERK                                                                         
+         4       1600 SALESMAN                                                                      
+         1       5000 PRESIDENT                                                                     
+         3       2975 MANAGER                                                                       
+         2       3000 ANALYST                                                                       
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --12]WRITE A QUERY TO DISPLAY MAXIMUM SALARY GIVEN TO AN EMPLOYEES WORKING IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT MAX(SAL), DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+  MAX(SAL)     DEPTNO                                                                               
+---------- ----------                                                                               
+      2850         30                                                                               
+      3000         20                                                                               
+      5000         10                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --13]WRITE A QUERY TO DISPLAYNUMBER OF TIMES SALARIES PRESENT IN EMPLOYEES TABLE ?
+SQL> 
+SQL> SELECT COUNT(*), SAL
+  2  FROM EMP
+  3  GROUP BY SAL;
+
+  COUNT(*)        SAL                                                                               
+---------- ----------                                                                               
+         1       2450                                                                               
+         1       5000                                                                               
+         1       1300                                                                               
+         2       1250                                                                               
+         1       2850                                                                               
+         1       2975                                                                               
+         1       1100                                                                               
+         2       3000                                                                               
+         1        800                                                                               
+         1       1600                                                                               
+         1       1500                                                                               
+         1        950                                                                               
+
+12 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --14]WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES WHO WORKING IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT COUNT(*), DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+  COUNT(*)     DEPTNO                                                                               
+---------- ----------                                                                               
+         6         30                                                                               
+         5         20                                                                               
+         3         10                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --15]WRITE A QUERY TO DISPLAY DETAILS OF ALL THE EMPLOYEES ?
+SQL> 
+SQL> SELECT *
+  2  FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> 
+SQL> SPOOL OFF;
