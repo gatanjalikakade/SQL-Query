@@ -1,0 +1,203 @@
+SQL> 
+SQL> --1] WRITE A QUERY TO DISPLAY DEPARTMENT NUMBER AND NUMBER OF EMPLOYEES WHO WORKING IN EACH DEPARTMENT IF THERE ARE ATLEAST 2 CLEARKS IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT COUNT(*), DEPTNO
+  2  FROM EMP
+  3  WHERE JOB='CLERK'
+  4  GROUP BY DEPTNO
+  5  HAVING COUNT(*) >=2;
+
+  COUNT(*)     DEPTNO                                                           
+---------- ----------                                                           
+         2         20                                                           
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --2] WRITE A QUERY TO DISPLAY DEPARTMENT NUMBER AND TOTAL SALARY NEEDED TO PAY ALL EMPLOYEE IN EACH DEPT IF THERE ARE ATLEAST 4 EMPLOYEE IN EACH DEPARTMENT ?
+SQL> 
+SQL> SELECT SUM(SAL), DEPTNO, COUNT(*)
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING COUNT(*) >=4;
+
+  SUM(SAL)     DEPTNO   COUNT(*)                                                
+---------- ---------- ----------                                                
+      9400         30          6                                                
+     10875         20          5                                                
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --3] WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEE EARNING SALARY MORE THAN 1200 IN EACH JOB AND THE TOTAL SALARY NEEDED TO PAY EMPLOYEE OF EACH JOB MUST EXCEES 3800 ?
+SQL> 
+SQL> SELET COUNT(*), SUM(SAL), JOB
+SP2-0734: unknown command beginning "SELET COUN..." - rest of line ignored.
+SQL> 
+SQL> SELECT  COUNT(*), SUM(SAL), JOB
+  2  FROM EMP
+  3  WHERE SAL > 1200
+  4  GROUP BY JOB
+  5  HAVING SUM(SAL) >3800;
+
+  COUNT(*)   SUM(SAL) JOB                                                       
+---------- ---------- ---------                                                 
+         4       5600 SALESMAN                                                  
+         1       5000 PRESIDENT                                                 
+         3       8275 MANAGER                                                   
+         2       6000 ANALYST                                                   
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --4] WRITE A QUERY TO DISPLAY DEPARTMENT NUMBER OF EMPLOYEE WORKING ONLY IF THERE ARE 2 EMPLOYEE WORKING IN EACH DEPARTMENT AS MANAGER ?
+SQL> 
+SQL> SELECT COUNT(*) , DEPTNO
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER'
+  4  GROUP BY DEPTNO
+  5  HAVING COUNT(*) =2;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --5] WRITE A QUERY TO DISPLAY JOB AND MAXIMUM SALARY OF EMPLOYEE IN EACH JOB IF THE MAX SALARY EXCEEPS 2600 ?
+SQL> 
+SQL> SELECT COUNT(*), DEPTNO
+  2  FROM EMP
+  3  WHERE JOB ='
+  4  
+SQL> 
+SQL> 
+SQL> SELECT MAX(SAL),JOB
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  HAVING MAX(SAL) >2600;
+
+  MAX(SAL) JOB                                                                  
+---------- ---------                                                            
+      5000 PRESIDENT                                                            
+      2975 MANAGER                                                              
+      3000 ANALYST                                                              
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --6]  WRITE A QUERY TO DISPLAY THE SALARIES WHICH ARE REPEATED IN EMP TABLE ?
+SQL> 
+SQL> SELECT SAL
+  2  FROM EMP
+  3  GROUP BY SAL
+  4  HAVING COUNT(SAL)>1;
+
+       SAL                                                                      
+----------                                                                      
+      1250                                                                      
+      3000                                                                      
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --7] WRITE A QUERY TO DISPLAY HIREDATE WHICH ARE DUPLICATED IN EMP TABLE ?
+SQL> 
+SQL> SELECT COUNT(*), HIREDATE
+  2  FROM EMP
+  3  GROUP BY HIREDATE
+  4  HAVING COUNT(*) >1;
+
+  COUNT(*) HIREDATE                                                             
+---------- ---------                                                            
+         2 03-DEC-81                                                            
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --8]  WRITE A QUERY TO DISPLAY AVAREGE SALARY OF EACH DEPARTMENT IF AVG SALARY IS LESS THAN 3000 ?
+SQL> 
+SQL> SELECT AVD(SAL) , DEPTNO
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING AVG(SAL)<3000;
+SELECT AVD(SAL) , DEPTNO
+       *
+ERROR at line 1:
+ORA-00904: "AVD": invalid identifier 
+
+
+SQL> SELECT AVG(SAL), DEPTNO
+  2   FROM EMP
+  3   GROUP BY DEPTNO
+  4   HAVING AVG(SAL)<3000;
+
+  AVG(SAL)     DEPTNO                                                           
+---------- ----------                                                           
+1566.66667         30                                                           
+      2175         20                                                           
+2916.66667         10                                                           
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --9] FROM EMP
+SQL>  GROUP BY DEPTNO
+SP2-0734: unknown command beginning "GROUP BY D..." - rest of line ignored.
+SQL>  HAVING AVG(SAL)<3000;
+SP2-0734: unknown command beginning "HAVING AVG..." - rest of line ignored.
+SQL> 
+SQL> 
+SQL> --------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --9]WRITE A QUERY TO DISPLAY DEPARTMENT NO IF THERE ARE ATLEAST 3 EMP IN EACH DEPARTMENT WHOSE NAME HAS CHAR 'A' OR 'S' ?
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*), DEPTNO
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A% OR ENAME LIKE '%S%'
+  4  GROUP BY DEPTNO
+  5  HAVING COUNT(*) >=3;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> 
+SQL>  SELECT COUNT(*), DEPTNO
+  2   FROM EMP
+  3   WHERE ENAME LIKE '%A%'  OR ENAME LIKE '%S%'
+  4  GROUP BY DEPTNO
+  5  HAVING COUNT(*) >=3;
+
+  COUNT(*)     DEPTNO                                                           
+---------- ----------                                                           
+         5         30                                                           
+         4         20                                                           
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --10] WRITE A QUERY TO DISPLAYMINIMUM AND MAXIMUM SALARY OF EACH JOB IF MIN SAL IS MORE THAN 1000 AND MAX SAL IS LESS THAN 3000 ?
+SQL> 
+SQL> 
+SQL> SELECT MIN(SAL), MAX(SAL), JOB
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  HAVING MIN(SAL)>1000 AND MAX(SAL) <3000;
+
+  MIN(SAL)   MAX(SAL) JOB                                                       
+---------- ---------- ---------                                                 
+      1250       1600 SALESMAN                                                  
+      2450       2975 MANAGER                                                   
+
+SQL> 
+SQL> 
+SQL> SPOOL OF;
