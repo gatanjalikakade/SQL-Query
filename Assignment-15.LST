@@ -1,0 +1,208 @@
+SQL> 
+SQL> set lines 100 pages 100
+SQL> 
+SQL> -------------------------------------------joins-----------------------------------------------
+SQL> 
+SQL> --1] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEE AND HIS LOCATION OF ALL THE EMPLOYEES ?
+SQL> 
+SQL> SELECT ENAME,LOC
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO=DEPT.DEPTNO;
+
+ENAME      LOC                                                                                      
+---------- -------------                                                                            
+SMITH      DALLAS                                                                                   
+ALLEN      CHICAGO                                                                                  
+WARD       CHICAGO                                                                                  
+JONES      DALLAS                                                                                   
+MARTIN     CHICAGO                                                                                  
+BLAKE      CHICAGO                                                                                  
+CLARK      NEW YORK                                                                                 
+SCOTT      DALLAS                                                                                   
+KING       NEW YORK                                                                                 
+TURNER     CHICAGO                                                                                  
+ADAMS      DALLAS                                                                                   
+JAMES      CHICAGO                                                                                  
+FORD       DALLAS                                                                                   
+MILLER     NEW YORK                                                                                 
+
+14 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --2] WRITE A QUERY TO DISPLAY DNAME AND SALARY FOR ALL THE EMPLOYEES WORKING IN ACCOUNTING ?
+SQL> 
+SQL> SELECT DNAME, SAL
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO=DEPT.DEPTNO AND DNAME='ACCOUNTING';
+
+DNAME                 SAL                                                                           
+-------------- ----------                                                                           
+ACCOUNTING           2450                                                                           
+ACCOUNTING           5000                                                                           
+ACCOUNTING           1300                                                                           
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --3] WRITE A QUERY TO DISPLAY DNAME AND ANNUAL SALARY FOR ALL EMPLOYEES WHOSE SALARY IS MORE THAN 2340 ?
+SQL> 
+SQL> 
+SQL> SELECT DNAME, SAL*12
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO=DEPT.DEPTNO AND SAL>2340;
+
+DNAME              SAL*12                                                                           
+-------------- ----------                                                                           
+RESEARCH            35700                                                                           
+SALES               34200                                                                           
+ACCOUNTING          29400                                                                           
+RESEARCH            36000                                                                           
+ACCOUNTING          60000                                                                           
+RESEARCH            36000                                                                           
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --4] WRITE A QUERY TO DISPLAY ENAME AND DNAME FOR ALL EMPLOYEES HAVING CHARACTER 'A' IN THEIR DNAME  ?
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO=DEPT.DEPTNO AND DNAME LIKE '%A%' ;
+
+ENAME      DNAME                                                                                    
+---------- --------------                                                                           
+SMITH      RESEARCH                                                                                 
+ALLEN      SALES                                                                                    
+WARD       SALES                                                                                    
+JONES      RESEARCH                                                                                 
+MARTIN     SALES                                                                                    
+BLAKE      SALES                                                                                    
+CLARK      ACCOUNTING                                                                               
+SCOTT      RESEARCH                                                                                 
+KING       ACCOUNTING                                                                               
+TURNER     SALES                                                                                    
+ADAMS      RESEARCH                                                                                 
+JAMES      SALES                                                                                    
+FORD       RESEARCH                                                                                 
+MILLER     ACCOUNTING                                                                               
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --5] WRITE A QUERY TO DISPLAY ENAME AND DNAME FOR ALL THE EMPLOYEES WORKING AS SALESMAN ?
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM EMP,DEPT
+  3  WHERE EMP.DEPTNO=DEPT.DEPTNO AND JOB IN 'SALESMAN' ;
+
+ENAME      DNAME                                                                                    
+---------- --------------                                                                           
+ALLEN      SALES                                                                                    
+WARD       SALES                                                                                    
+MARTIN     SALES                                                                                    
+TURNER     SALES                                                                                    
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --6] WRITE A QUERY TO DISPLAY DNAME AND JOB FOR ALL THE EMPLOYEES WHOES JOB AND DNAME STARTS WITH CHARACTER 'S' ?
+SQL> 
+SQL> SELECT DNAME , JOB
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO= DEPT.DEPTNO AND JOB LIKE 'S%' AND DNAME LIKE 'S%';
+
+DNAME          JOB                                                                                  
+-------------- ---------                                                                            
+SALES          SALESMAN                                                                             
+SALES          SALESMAN                                                                             
+SALES          SALESMAN                                                                             
+SALES          SALESMAN                                                                             
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> -7] WRITE A QUERY TO DISPLAY DNAME AND MGR NO FOR EMPLOYEES REPORTING TO 7839 ?
+SP2-0734: unknown command beginning "-7] WRITE ..." - rest of line ignored.
+SQL> 
+SQL> --7]  WRITE A QUERY TO DISPLAY DNAME AND MGR NO FOR EMPLOYEE REPORTING TO 7839?
+SQL> 
+SQL> SELECT DNAME, MGR
+  2  FROM EMP,DEPT
+  3  WHERE EMP.DEPTNO= DEPT.DEPTNO AND MGR = 7839;
+
+DNAME                 MGR                                                                           
+-------------- ----------                                                                           
+RESEARCH             7839                                                                           
+SALES                7839                                                                           
+ACCOUNTING           7839                                                                           
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --8] WRITE A QUERY TO DISPLAY DNAME AND HIREDATE FOR EMPLOYEES HIRED AFTER 83 INTO ACCOUNTING FOR RESEARCH DEPARTMENT ?
+SQL> 
+SQL> 
+SQL> SELECT DNAME, HIREDATE
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO= DEPT.DEPTNO AND  HIREDATE > '31-DEC-1983' AND DNAME IN ('ACCOUNTING', 'RESEARCH');
+
+DNAME          HIREDATE                                                                             
+-------------- ---------                                                                            
+RESEARCH       19-APR-87                                                                            
+RESEARCH       23-MAY-87                                                                            
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --9]  WRITE A QUERY TO DISPLAY DNAME AND ENAME OF THE EMPLOYEES WHO ARE GETTING COMMISSION IN DEPARTMENT 10 OR 30 ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM EMP,DEPT
+  3  WHERE EMP.DEPTNO=DEPT.DEPTNO AND COO IS NOT NULL AND EMP.DEPTNO IN (10,30);
+WHERE EMP.DEPTNO=DEPT.DEPTNO AND COO IS NOT NULL AND EMP.DEPTNO IN (10,30)
+                                 *
+ERROR at line 3:
+ORA-00904: "COO": invalid identifier 
+
+
+SQL>  SELECT ENAME, DNAME
+  2   FROM EMP,DEPT
+  3   WHERE EMP.DEPTNO=DEPT.DEPTNO AND COMM IS NOT NULL AND EMP.DEPTNO IN (10,30);
+
+ENAME      DNAME                                                                                    
+---------- --------------                                                                           
+ALLEN      SALES                                                                                    
+WARD       SALES                                                                                    
+MARTIN     SALES                                                                                    
+TURNER     SALES                                                                                    
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --10] WRITE A QUERY TO DISPLAY DNAME AND EMPNO FOR ALL THE EMPLOYEES WHOSE EMPNO ARE 7839, 7902 AND ARE WORKING IN LOCATION NEWYORK ?
+SQL> 
+SQL> SELECT DNAME, EMPNO
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO= DEPT.DEPTNO AND EMPNO IN (7839, 7902) AND LOC ='NEWYORK';
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> SPOOL OFF;
