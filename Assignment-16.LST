@@ -1,0 +1,361 @@
+SQL> 
+SQL> 
+SQL> -----------------------------OUTER JOIN--------------------------------------------------------
+SQL> 
+SQL> --1]WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEE AND HIS MANAGER'S NAME IF EMPLOYEE IS WORKING AS CLERK ?
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E1.JOB='CLERK';
+
+ENAME      ENAME                                                                                    
+---------- ----------                                                                               
+SMITH      FORD                                                                                     
+ADAMS      SCOTT                                                                                    
+JAMES      BLAKE                                                                                    
+MILLER     CLARK                                                                                    
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --2]WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEE AND MANAGER'S DESIGNARION IF MANAGER WORKS IN DEPT 10 OR 20 ?
+SQL> 
+SQL> SELECT E1.ENAME, E2.JOB
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO IN (10,20);
+
+ENAME      JOB                                                                                      
+---------- ---------                                                                                
+SMITH      ANALYST                                                                                  
+JONES      PRESIDENT                                                                                
+BLAKE      PRESIDENT                                                                                
+CLARK      PRESIDENT                                                                                
+SCOTT      MANAGER                                                                                  
+ADAMS      ANALYST                                                                                  
+FORD       MANAGER                                                                                  
+MILLER     MANAGER                                                                                  
+
+8 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --3] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEE AND MANAGERS SALARY IF EMPLOYEE AND MANAGER BOTH EARN MORE THEN 2000 ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.SAL
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E1.SAL >2000 AND E2.SAL>2000 ;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+JONES            5000                                                                               
+BLAKE            5000                                                                               
+CLARK            5000                                                                               
+SCOTT            2975                                                                               
+FORD             2975                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --4]WRITE A QUERY TO DISPLAY NAME AND MANAGERS COMMISION IF EMPLOYEE WORK AS SALESMAN AND MANAGER WORKS IN DEPARTMENT 30 ?
+SQL> 
+SQL> SELECT E1.ENAME, E2.COMM
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E1.JOB IN 'SALESMAN' AND E2.DEPTNO IN 30;
+
+ENAME            COMM                                                                               
+---------- ----------                                                                               
+ALLEN                                                                                               
+WARD                                                                                                
+MARTIN                                                                                              
+TURNER                                                                                              
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --5] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND MANAGERS HIREDATE IF EMPLOYEE WAS HIRED BEFORE 1982 ?
+SQL> 
+SQL> SELECT E1.ENAME , E2.HIREDATE
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E1.HIREDATE < '01-JAN-1982';
+
+ENAME      HIREDATE                                                                                 
+---------- ---------                                                                                
+SMITH      03-DEC-81                                                                                
+ALLEN      01-MAY-81                                                                                
+WARD       01-MAY-81                                                                                
+JONES      17-NOV-81                                                                                
+MARTIN     01-MAY-81                                                                                
+BLAKE      17-NOV-81                                                                                
+CLARK      17-NOV-81                                                                                
+TURNER     01-MAY-81                                                                                
+JAMES      01-MAY-81                                                                                
+FORD       02-APR-81                                                                                
+
+10 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --6] WRITE A QUERY TO DISPLAY EMPLOYEE NAME  AND MANAGER NAME AND THEIR SALARY IF EMPLOYEE EARNS MORE THAN MANAGER ?
+SQL> 
+SQL> SELECT E1.ENAME, E2. ENAME
+  2  , E2. SAL, E1.SAL
+  3  FROM EMP E1, EMP E2
+  4  WHERE E1.MGR= E2.EMPNO AND E1.SAL > E2.SAL;
+
+ENAME      ENAME             SAL        SAL                                                         
+---------- ---------- ---------- ----------                                                         
+SCOTT      JONES            2975       3000                                                         
+FORD       JONES            2975       3000                                                         
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --7] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND HIREDATE MANAGER NAME AND HIREDATE OF MANAGER IF MANAGER WAS HIRED BEFORE EMPLOYEE ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E1.HIREDATE, E2.ENAME, E2.HIREDATE
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR = E2.EMPNO AND E1.HIREDATE > E2.HIREDATE ;
+
+ENAME      HIREDATE  ENAME      HIREDATE                                                            
+---------- --------- ---------- ---------                                                           
+MARTIN     28-SEP-81 BLAKE      01-MAY-81                                                           
+SCOTT      19-APR-87 JONES      02-APR-81                                                           
+TURNER     08-SEP-81 BLAKE      01-MAY-81                                                           
+ADAMS      23-MAY-87 SCOTT      19-APR-87                                                           
+JAMES      03-DEC-81 BLAKE      01-MAY-81                                                           
+FORD       03-DEC-81 JONES      02-APR-81                                                           
+MILLER     23-JAN-82 CLARK      09-JUN-81                                                           
+
+7 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --8] WRITE A QUERY TO DISPLAYEMPLOYEE NAME AND MANAGER NAME IF BOTH ARE WORKING IN SAME JOB ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E1.JOB = E2.JOB ;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E1.JOB == E2.JOB ;
+WHERE E1.MGR= E2.EMPNO AND E1.JOB == E2.JOB 
+                                   *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --9] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND MANAGER NAME IF MANAGER IS WORKING AS ACTUAL MANAGER ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO AND E2.JOB ='MANAGER';
+
+ENAME      ENAME                                                                                    
+---------- ----------                                                                               
+ALLEN      BLAKE                                                                                    
+WARD       BLAKE                                                                                    
+MARTIN     BLAKE                                                                                    
+SCOTT      JONES                                                                                    
+TURNER     BLAKE                                                                                    
+JAMES      BLAKE                                                                                    
+FORD       JONES                                                                                    
+MILLER     CLARK                                                                                    
+
+8 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --10] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND MANAGER NAME ALONG WITH THEIR ANNUAL SALARY IF EMPLOYEE WORKS IN DEPTNO 10, 20 AND MANAGER, SALARY IS GREATER THAN EMPLOYEE SALARY ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME , E1.SAL*12 , E2.ENAME, E2.SAL*12
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR = E2.EMPNO AND E1.DEPTNO IN (10,20) AND E2.SAL >E1.SAL;
+
+ENAME       E1.SAL*12 ENAME       E2.SAL*12                                                         
+---------- ---------- ---------- ----------                                                         
+SMITH            9600 FORD            36000                                                         
+JONES           35700 KING            60000                                                         
+CLARK           29400 KING            60000                                                         
+ADAMS           13200 SCOTT           36000                                                         
+MILLER          15600 CLARK           29400                                                         
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --11] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND MANAGER DESIGNATION FOR ALL THE EMPLOYEE ?
+SQL> 
+SQL> SELECT E1.ENAME, E2.JOB
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR= E2.EMPNO ;
+
+ENAME      JOB                                                                                      
+---------- ---------                                                                                
+SMITH      ANALYST                                                                                  
+ALLEN      MANAGER                                                                                  
+WARD       MANAGER                                                                                  
+JONES      PRESIDENT                                                                                
+MARTIN     MANAGER                                                                                  
+BLAKE      PRESIDENT                                                                                
+CLARK      PRESIDENT                                                                                
+SCOTT      MANAGER                                                                                  
+TURNER     MANAGER                                                                                  
+ADAMS      ANALYST                                                                                  
+JAMES      MANAGER                                                                                  
+FORD       MANAGER                                                                                  
+MILLER     MANAGER                                                                                  
+
+13 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --12] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND MANAGER SALARY IF MANAGER'S SALARY ENDS WITH 50 ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME , E2.SAL
+  2  FROM EMP E1, EMP E2
+  3  WHERE E1.MGR=E2.EMPNO AND E2.SAL LIKE '%50';
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ALLEN            2850                                                                               
+WARD             2850                                                                               
+MARTIN           2850                                                                               
+TURNER           2850                                                                               
+JAMES            2850                                                                               
+MILLER           2450                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --13] WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND DEPARTMENT NAME FOR ALL THE EMPLOYEES EVEN IF EMPLOYEES ARE NOT WORKING IN ANY DEPARTMENT ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME ,DNAME
+  2  FROM EMP, DEPT
+  3  WHERE EMP.DEPTNO = DEPT.DEPTNO(+);
+
+ENAME      DNAME                                                                                    
+---------- --------------                                                                           
+SMITH      RESEARCH                                                                                 
+ALLEN      SALES                                                                                    
+WARD       SALES                                                                                    
+JONES      RESEARCH                                                                                 
+MARTIN     SALES                                                                                    
+BLAKE      SALES                                                                                    
+CLARK      ACCOUNTING                                                                               
+SCOTT      RESEARCH                                                                                 
+KING       ACCOUNTING                                                                               
+TURNER     SALES                                                                                    
+ADAMS      RESEARCH                                                                                 
+JAMES      SALES                                                                                    
+FORD       RESEARCH                                                                                 
+MILLER     ACCOUNTING                                                                               
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --14] WRITE A QUERY TO DISPLAY EMP NAME AND DEPT NAME OF ALL THE EMPLOYEE EVEN IF THERE ARE NO  EMPLOYEES WORKING IN THE DEPARTMENT ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM EMP RIGHT OUTER JOIN DEPT
+  3  WHERE EMP.DEPTNO = DEPT.DEPTNO;
+WHERE EMP.DEPTNO = DEPT.DEPTNO
+*
+ERROR at line 3:
+ORA-00905: missing keyword 
+
+
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM EMP RIGHT OUTER JOIN DEPT
+  3  ON EMP.DEPTNO = DEPT.DEPTNO;
+
+ENAME      DNAME                                                                                    
+---------- --------------                                                                           
+CLARK      ACCOUNTING                                                                               
+KING       ACCOUNTING                                                                               
+MILLER     ACCOUNTING                                                                               
+JONES      RESEARCH                                                                                 
+FORD       RESEARCH                                                                                 
+ADAMS      RESEARCH                                                                                 
+SMITH      RESEARCH                                                                                 
+SCOTT      RESEARCH                                                                                 
+WARD       SALES                                                                                    
+TURNER     SALES                                                                                    
+ALLEN      SALES                                                                                    
+JAMES      SALES                                                                                    
+BLAKE      SALES                                                                                    
+MARTIN     SALES                                                                                    
+           OPERATIONS                                                                               
+
+15 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --15] WRITE A QUERY TO DISPLAY EMP NAME AND DEPT NAME OF ALL THE EMPLOYEES EVEN IF THE EMPLOYEE ARE NOT WORKING IN ANY DEPARTMENT AND DEPARTMENT HAVING NO EMPLOYEES ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, DNAME
+  2  FROM FULL OUETR JOIN DEPT
+  3  
+SQL> 
+SQL> 
+SQL> SELECT ENAME , DNAME
+  2  FROM EMP FULL OUTER JOIN DEPT
+  3  ON EMP.DEPTNO= DEPT.DEPTNO;
+
+ENAME      DNAME                                                                                    
+---------- --------------                                                                           
+SMITH      RESEARCH                                                                                 
+ALLEN      SALES                                                                                    
+WARD       SALES                                                                                    
+JONES      RESEARCH                                                                                 
+MARTIN     SALES                                                                                    
+BLAKE      SALES                                                                                    
+CLARK      ACCOUNTING                                                                               
+SCOTT      RESEARCH                                                                                 
+KING       ACCOUNTING                                                                               
+TURNER     SALES                                                                                    
+ADAMS      RESEARCH                                                                                 
+JAMES      SALES                                                                                    
+FORD       RESEARCH                                                                                 
+MILLER     ACCOUNTING                                                                               
+           OPERATIONS                                                                               
+
+15 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> SPOOL OFF;
