@@ -1,0 +1,342 @@
+SQL> 
+SQL> set lines 100 pages 100
+SQL> 
+SQL> 
+SQL> --1] WRITE A QUERY TO DISPLAY ENAME AND MANAGERS NAME AND EMP LOCATION FOR THE EMPLOYEE WORKING AS CLERK ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME, D1.LOC
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.JOB='CLERK' ;
+
+ENAME      ENAME      LOC                                                                           
+---------- ---------- -------------                                                                 
+SMITH      FORD       DALLAS                                                                        
+ADAMS      SCOTT      DALLAS                                                                        
+JAMES      BLAKE      CHICAGO                                                                       
+MILLER     CLARK      NEW YORK                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --2]  WRITE A QUERY TO DISPLAY
+SQL> -- ENAME , MANAGERS SALARY AND MANAGERS LOATION IF MANAGER WORKING AS PRESIDENT ?
+SQL> 
+SQL> SELECT E1.ENAME, E2.SAL, D1.LOC
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.JOB='PRESIDENT' ;
+
+ENAME             SAL LOC                                                                           
+---------- ---------- -------------                                                                 
+JONES            5000 NEW YORK                                                                      
+BLAKE            5000 NEW YORK                                                                      
+CLARK            5000 NEW YORK                                                                      
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --3] WRITE A QUERY TO DISPLAY ENAME EMPLOYEE SALARY MANAGERS NAME, MANAGER'S SALARY ALONG WOTH EMPLOYEE DNAME IF EMPLOYEE EARNS MORE THAN MANAGER ?
+SQL> 
+SQL> SELECT E1.ENAME, E1.SAL, E2.ENAME,E2.SAL, D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR=E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.SAL > E2.SAL;
+
+ENAME             SAL ENAME             SAL DNAME                                                   
+---------- ---------- ---------- ---------- --------------                                          
+SCOTT            3000 JONES            2975 RESEARCH                                                
+FORD             3000 JONES            2975 RESEARCH                                                
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --4]  WRITE A QUERY TO DISPLAY ENAME ,SALARY, MANAGERS NAME , MANAGERS DEPARTMENT NAME IF MANAGER WORK IN NEWYORK WITH SALARY MORE THAN 3000 ?
+SQL> 
+SQL> SELECT E1.ENAME, E1.SAL, E2.ENAME, E2.SAL,D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.LOC='NEWYORK' AND E2.SAL>3000;
+WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.LOC='NEWYORK' AND E2.SAL>3000
+                                                     *
+ERROR at line 3:
+ORA-00904: "E2"."LOC": invalid identifier 
+
+
+SQL> SELECT E1.ENAME, E1.SAL, E2.ENAME, E2.SAL,D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.LOC='NEW YORK' AND E2.SAL>3000 ;
+WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.LOC='NEW YORK' AND E2.SAL>3000 
+                                                     *
+ERROR at line 3:
+ORA-00904: "E2"."LOC": invalid identifier 
+
+
+SQL> SELECT E1.ENAME, E1.SAL, E2.ENAME, E2.SAL,D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.LOC= 'NEW YORK' AND E2.SAL>3000;
+WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO = D1.DEPTNO AND E2.LOC= 'NEW YORK' AND E2.SAL>3000
+                                                     *
+ERROR at line 3:
+ORA-00904: "E2"."LOC": invalid identifier 
+
+
+SQL> 
+SQL> CLS
+SP2-0042: unknown command "CLS" - rest of line ignored.
+SQL> CLSCR
+SP2-0042: unknown command "CLSCR" - rest of line ignored.
+SQL> CL SCR
+SQL> 
+SQL> 
+SQL> --1] WRITE A QUERY TO DISPLAY DETAILS OF ALL EMPLOYEE?
+SQL> 
+SQL> SELECT * FROM EMP
+  2  ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --2]  WRITE A QUERY TO DISPLAY DEPARTMENT TABLE ?
+SQL> 
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        10 ACCOUNTING     NEW YORK                                                                  
+        20 RESEARCH       DALLAS                                                                    
+        30 SALES          CHICAGO                                                                   
+        40 OPERATIONS     BOSTON                                                                    
+
+SQL> 
+SQL> 
+SQL> ------------------------------------------------------------------------------------------------
+SQL> 
+SQL> --3] WRITE A QUERY TO DISPLAY EMP ENAME, MANAGERS ENAME AND EMP LOCATION FOR THE EMP WORKING AS CLERK ?
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME, D1.LOC
+  2  FROM EMP E1, EMP E2, DEPT D2
+  3  WHERE E1.MGR=E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.JOB='CLERK' ;
+WHERE E1.MGR=E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.JOB='CLERK' 
+                                     *
+ERROR at line 3:
+ORA-00904: "D1"."DEPTNO": invalid identifier 
+
+
+SQL>  SELECT E1.ENAME, E2.ENAME, D1.LOC
+  2   FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR=E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.JOB='CLERK' ;
+
+ENAME      ENAME      LOC                                                                           
+---------- ---------- -------------                                                                 
+SMITH      FORD       DALLAS                                                                        
+ADAMS      SCOTT      DALLAS                                                                        
+JAMES      BLAKE      CHICAGO                                                                       
+MILLER     CLARK      NEW YORK                                                                      
+
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --4] WRITE A QUERY TO DISPLAY ENAME MANAGERS NAME SALARY AND MANAGERS LOCATION IF MANAGER WORKING AS PRESIDENT ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME, E2.SAL, D1.LOC
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO= D1.DEPTNO AND E2.JOB='PRESIDENT' ;
+
+ENAME      ENAME             SAL LOC                                                                
+---------- ---------- ---------- -------------                                                      
+JONES      KING             5000 NEW YORK                                                           
+BLAKE      KING             5000 NEW YORK                                                           
+CLARK      KING             5000 NEW YORK                                                           
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --5] WRITE A QUERY TO DISPLAY EMP NAME ,SALARY , MANAGERS NAME , SALARY WITH EMPLOYEE DNAME IF EMPLOYEE EARNS MORE THAN MANAGER ?
+SQL> 
+SQL> SELECT E1.ENAME, E1.SAL, E2.ENAME, E2.SAL, D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR=E2.EMPNO AND E2.DEPTNO= D1.DEPTNO AND E1.SAL>E2.SAL;
+
+ENAME             SAL ENAME             SAL DNAME                                                   
+---------- ---------- ---------- ---------- --------------                                          
+SCOTT            3000 JONES            2975 RESEARCH                                                
+FORD             3000 JONES            2975 RESEARCH                                                
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --6] WRITE A QUERY TO DISPLAY EMP NAME ,SALARY MANAGER NAME MANAGER DNAME IF MANAGR WORK IN NEW YORK AND SALARY MORE THAN 3000 ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E1.SAL, E2.ENAME, D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO= D1.DEPTNO AND E2.LOC IN 'NEW YORK' AND E2.SAL >3000 ;
+WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO= D1.DEPTNO AND E2.LOC IN 'NEW YORK' AND E2.SAL >3000 
+                                                    *
+ERROR at line 3:
+ORA-00904: "E2"."LOC": invalid identifier 
+
+
+SQL> 
+SQL>  SELECT E1.ENAME, E1.SAL, E2.ENAME, D1.DNAME
+  2   FROM EMP E1, EMP E2, DEPT D1
+  3   WHERE E1.MGR= E2.EMPNO AND E2.DEPTNO= D1.DEPTNO AND D1.LOC='NEW YORK' AND E2.SAL>3000;
+
+ENAME             SAL ENAME      DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+JONES            2975 KING       ACCOUNTING                                                         
+BLAKE            2850 KING       ACCOUNTING                                                         
+CLARK            2450 KING       ACCOUNTING                                                         
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --7] WRITE A QUERY TO DISPLAY ENAME  EMP DNAME MANAGERS NAME AND MANAGERS DNAME IF EMPLOYEE AND MANAGER WORKS IN SAME LOCATION ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, D1.DNAME, E2.ENAME, D2.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1, DEPT D2
+  3  WHERE E1.MGR=E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E2.DEPTNO= D2.DEPTNO AND D1.LOC=D2.LOC;
+
+ENAME      DNAME          ENAME      DNAME                                                          
+---------- -------------- ---------- --------------                                                 
+SMITH      RESEARCH       FORD       RESEARCH                                                       
+ALLEN      SALES          BLAKE      SALES                                                          
+WARD       SALES          BLAKE      SALES                                                          
+MARTIN     SALES          BLAKE      SALES                                                          
+CLARK      ACCOUNTING     KING       ACCOUNTING                                                     
+SCOTT      RESEARCH       JONES      RESEARCH                                                       
+TURNER     SALES          BLAKE      SALES                                                          
+ADAMS      RESEARCH       SCOTT      RESEARCH                                                       
+JAMES      SALES          BLAKE      SALES                                                          
+FORD       RESEARCH       JONES      RESEARCH                                                       
+MILLER     ACCOUNTING     CLARK      ACCOUNTING                                                     
+
+11 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --8] WRITE A QUERY TO DISPLAY ENAME , EMP HIREDATE , MANAGERS HIREDATE IF MANAGER WAS HIRED BEFORE EMPLOYEE IN TO ACCOUNTING DEPARTMENT ?
+SQL> 
+SQL> SELECT E1.ENAME, E1.HIREDATE, E2.ENAME, E2.HIREDATE, D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.HIREDATE > E2.HIREDATE AND E1.DNAME='ACCOUNTING' ;
+WHERE E1.MGR= E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.HIREDATE > E2.HIREDATE AND E1.DNAME='ACCOUNTING' 
+                                                                                  *
+ERROR at line 3:
+ORA-00904: "E1"."DNAME": invalid identifier 
+
+
+SQL> 
+SQL> SELECT E1.ENAME, E1.HIREDATE, E2.ENAME, E2.HIREDATE, D1.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1
+  3  WHERE E1.MGR= E2.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E1.HIREDATE > E2.HIREDATE AND D1.DNAME= 'ACCOUNTING' ;
+
+ENAME      HIREDATE  ENAME      HIREDATE  DNAME                                                     
+---------- --------- ---------- --------- --------------                                            
+MILLER     23-JAN-82 CLARK      09-JUN-81 ACCOUNTING                                                
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --9] WRITE  A QUERY TO DISPLAY EMP NAME AND MANAGERS NAME ALONG WITH MANAGER'S MANAGER NAME ?
+SQL> 
+SQL> SELECT E1.ENAME , E2.ENAME , E3.ENAME
+  2  FROM EMP E1, EMP E2, EMP E3
+  3  WHERE E1.MGR= E2.EMPNO AND E2.MGR= E3.EMPNO ;
+
+ENAME      ENAME      ENAME                                                                         
+---------- ---------- ----------                                                                    
+SMITH      FORD       JONES                                                                         
+ALLEN      BLAKE      KING                                                                          
+WARD       BLAKE      KING                                                                          
+MARTIN     BLAKE      KING                                                                          
+SCOTT      JONES      KING                                                                          
+TURNER     BLAKE      KING                                                                          
+ADAMS      SCOTT      JONES                                                                         
+JAMES      BLAKE      KING                                                                          
+FORD       JONES      KING                                                                          
+MILLER     CLARK      KING                                                                          
+
+10 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --10]  WRITE  A QUERY TO DISPLAY EMP NAME EMP DNAME MANAGERS NAME HIS DNAME IF MANAGER IS HIRED BEFORE 1982 ?
+SQL> 
+SQL> 
+SQL> SELECT E1.ENAME, E2.ENAME, D1.DNAME, D2.DNAME
+  2  FROM EMP E1, EMP E2, DEPT D1, DEPT D2
+  3  WHERE E1.MGR=E2.EMPNO AND E1.DEPTNO=D1.DEPTNO AND E2.DEPTNO= D2.DEPTNO AND E2.HIREDATE < '01-JAN-1982' ;
+
+ENAME      ENAME      DNAME          DNAME                                                          
+---------- ---------- -------------- --------------                                                 
+SMITH      FORD       RESEARCH       RESEARCH                                                       
+ALLEN      BLAKE      SALES          SALES                                                          
+WARD       BLAKE      SALES          SALES                                                          
+JONES      KING       RESEARCH       ACCOUNTING                                                     
+MARTIN     BLAKE      SALES          SALES                                                          
+BLAKE      KING       SALES          ACCOUNTING                                                     
+CLARK      KING       ACCOUNTING     ACCOUNTING                                                     
+SCOTT      JONES      RESEARCH       RESEARCH                                                       
+TURNER     BLAKE      SALES          SALES                                                          
+JAMES      BLAKE      SALES          SALES                                                          
+FORD       JONES      RESEARCH       RESEARCH                                                       
+MILLER     CLARK      ACCOUNTING     ACCOUNTING                                                     
+
+12 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --11]  WRITE  A QUERY TO DISPLAY EMP NAME AND DNAME  MANAGERS NAME WITH LOCATION ALONG WITH MANAGERS MANAGER NAME ?
+SQL> 
+SQL> SELECT E1.ENAME, D1.DNAME, E2.ENAME, D2.LOC, E3.ENAME
+  2  FROM EMP E1, EMP E2, EMP E3, DEPT D1, DEPT D2
+  3  WHERE E1.MGR= E2.EMPNO AND E2.MGR=E3.EMPNO AND E1.DEPTNO= D1.DEPTNO AND E2.DEPTNO= D2.DEPTNO ;
+
+ENAME      DNAME          ENAME      LOC           ENAME                                            
+---------- -------------- ---------- ------------- ----------                                       
+SMITH      RESEARCH       FORD       DALLAS        JONES                                            
+ALLEN      SALES          BLAKE      CHICAGO       KING                                             
+WARD       SALES          BLAKE      CHICAGO       KING                                             
+MARTIN     SALES          BLAKE      CHICAGO       KING                                             
+SCOTT      RESEARCH       JONES      DALLAS        KING                                             
+TURNER     SALES          BLAKE      CHICAGO       KING                                             
+ADAMS      RESEARCH       SCOTT      DALLAS        JONES                                            
+JAMES      SALES          BLAKE      CHICAGO       KING                                             
+FORD       RESEARCH       JONES      DALLAS        KING                                             
+MILLER     ACCOUNTING     CLARK      NEW YORK      KING                                             
+
+10 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> SPOOL OFF;
