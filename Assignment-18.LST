@@ -1,0 +1,674 @@
+SQL> 
+SQL> 
+SQL> --------------------------------------------Query test 1---------------------------------------
+SQL> 
+SQL> --1] WRITE A QUERY TO DISPLAY ENAME SALARY WITH THE HIKE OF 25% AND THE EMPLOYEES WHO ARE WORKING AS ANALYST SALESMAN IN THE DEPTNO 10,20,30 ?
+SQL> 
+SQL> SELECT ENAME, SAL, SAL+SAL*25/100
+  2  FROM EMP
+  3  WHERE JOB IN ('ANALYST','SALESMAN') AND DEPTNO IN (10,20,30);
+
+ENAME             SAL SAL+SAL*25/100                                                                
+---------- ---------- --------------                                                                
+ALLEN            1600           2000                                                                
+WARD             1250         1562.5                                                                
+MARTIN           1250         1562.5                                                                
+SCOTT            3000           3750                                                                
+TURNER           1500           1875                                                                
+FORD             3000           3750                                                                
+
+6 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --2] WRITE A QUERY TO DISPLAY details of the employees along with annual salary with the hike of 15% and  the employees who are getting salary and working as manager and clerk ?
+SQL> 
+SQL> 
+SQL> select emp.*,sal*12+sal*12*15/100
+  2  from emp
+  3  where sal is not null and job in ('manager','clerk');
+
+no rows selected
+
+SQL> 
+SQL> SELECT EMP.*, SAL*12+SAL*12*15/100
+  2  FROM EMP
+  3  WHERE SAL IS NOT NULL AND JOB IN ('MANAGER','CLERK');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+SAL*12+SAL*12*15/100                                                                                
+--------------------                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+               11040                                                                                
+                                                                                                    
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+               41055                                                                                
+                                                                                                    
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+               39330                                                                                
+                                                                                                    
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+               33810                                                                                
+                                                                                                    
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+               15180                                                                                
+                                                                                                    
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+               13110                                                                                
+                                                                                                    
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+               17940                                                                                
+                                                                                                    
+
+7 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --3] WRITE A QUERY TO DISPLAY MAXIMUM SALARY AND MINIMUM SALARY SUM OF SALARY OF THE EMPLOYEES WHO ARE WORKING IN EACH DEPARTMENT AND HAVING THE REPORTING MANAGER AND NOT GETTING COMMISSION ?
+SQL> 
+SQL> 
+SQL> SELECT MAX(SAL), MIN(SAL), SUM(SAL), DEPTNO
+  2  FROM EMP
+  3  WHERE MGR IS NOT NULL AND COMM IS NULL
+  4  GROUP BY DEPTNO;
+
+  MAX(SAL)   MIN(SAL)   SUM(SAL)     DEPTNO                                                         
+---------- ---------- ---------- ----------                                                         
+      2850        950       3800         30                                                         
+      3000        800      10875         20                                                         
+      2450       1300       3750         10                                                         
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --4] WRITE A QUERY TO DISPLAY NUMBER OF EMPLOYEES AND AVERAGE SALARY OF THE EMPLOYEE WHO ARE WORKING IN EACH JOB AND HIRED IN RANGE BETWEEN 1980 AND 1990 AND WORKING IN DEPTNO 10,20,30 ?
+SQL> 
+SQL> 
+SQL> SELECT COUNT(*), AVG(SAL) , JOB
+  2  FROM EMP
+  3  WHERE HIREDATE BETWEEN '01-JAN-1981' AND '31-DEC-1989' AND DEPTNO IN (10,20,30)
+  4  GROUP BY JOB;
+
+  COUNT(*)   AVG(SAL) JOB                                                                           
+---------- ---------- ---------                                                                     
+         4       1400 SALESMAN                                                                      
+         3 1116.66667 CLERK                                                                         
+         1       5000 PRESIDENT                                                                     
+         3 2758.33333 MANAGER                                                                       
+         2       3000 ANALYST                                                                       
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --5]  WRITE A QUERY TO DISPLAY ENAME, HIREDATE, SALARY OF THE EMPLOYEES AND ARRANGE THE RECORDS IN ASSENDING ORDER BASED ON SALARY COLUMN ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, HIREDATE, SAL
+  2  FROM EMP
+  3  ORDER BY SAL;
+
+ENAME      HIREDATE         SAL                                                                     
+---------- --------- ----------                                                                     
+SMITH      17-DEC-80        800                                                                     
+JAMES      03-DEC-81        950                                                                     
+ADAMS      23-MAY-87       1100                                                                     
+WARD       22-FEB-81       1250                                                                     
+MARTIN     28-SEP-81       1250                                                                     
+MILLER     23-JAN-82       1300                                                                     
+TURNER     08-SEP-81       1500                                                                     
+ALLEN      20-FEB-81       1600                                                                     
+CLARK      09-JUN-81       2450                                                                     
+BLAKE      01-MAY-81       2850                                                                     
+JONES      02-APR-81       2975                                                                     
+SCOTT      19-APR-87       3000                                                                     
+FORD       03-DEC-81       3000                                                                     
+KING       17-NOV-81       5000                                                                     
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --6]  WRITE A QUERY TO DISPLAY ENAME, SALARY OF THE EMPLOYEES AND THE EMPLOYEES WHO ARE WORKING IN THE DEPTNO 10,20,30 AND WORKING AS SALESMAN, MANAGER , ANALYST AND GETTING SALARY IN THE RANGE BETWEEN 1500 AND 5000 AND ARRANGE THE RECORDS IN DESCENDING ORDER BASED ON SALARY COLUMN ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  WHERE DEPTNO IN (10,20,30) AND JOB IN ('SALESMAN', 'MANAGER', 'ANALYST') AND SAL BETWEEN 1501 AND 4999
+  4  ORDER BY SAL DESC;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+SCOTT            3000                                                                               
+FORD             3000                                                                               
+JONES            2975                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+ALLEN            1600                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --7]  WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEES WHOSE NAME CONSIST OF CHARACTER A AND HIRED AFTER 1980 AND GETTING SALARY  MORE THAN 1500 ?
+SQL> 
+SQL> 
+SQL> SELECT  ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A%' AND HIREDATE >'31-DEC-1980' AND SAL > 1500 ;
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+BLAKE                                                                                               
+CLARK                                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --8]  WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHOSE NAME START AND ENDS WITH %  ;
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE '$%%$%' ESCAPE '$';
+
+no rows selected
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --9] WRITE A QUERY TO DISPLAY ENAME ,SALARY OF THE EMPLOYEES WHO ARE GETTING SALARY MORE THAN KING AND THE EMPLOYEE WHO HIRED BEFORE SCOTT AND NOT GETTING COMMISSION ?
+SQL> 
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  WHERE SAL > (SELECT SAL FROM EMP WHERE ENAME ='KING') AND HIREDATE < (SELECT HIREDATE FROM EMP WHERE ENAME ='SCOTT') AND COMM IS NOT NULL ;
+
+no rows selected
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --10] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE WORKING IN THE SAME DEPTNO AS BLAKE AND NOT GETTING COMMISSION  ?
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMP WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME ='BLAKE') AND COMM IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --11]  WRITE A QUERY TO DISPLAY ENAME ,SALARY OF THE EMPLOYEE AND THE EMPLOYEE WHO ARE WORKING AS SALESMAN ,ANALYST ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, SAL
+  2  FROM EMP
+  3  WHERE JOB IN ('SALESMAN', 'ANALYST');
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ALLEN            1600                                                                               
+WARD             1250                                                                               
+MARTIN           1250                                                                               
+SCOTT            3000                                                                               
+TURNER           1500                                                                               
+FORD             3000                                                                               
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --12]  WRITE A QUERY TO DISPLAY DETAILS OF ALL THE EMPLOYEES ?
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --13]  WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEE WHO ARE WORKING IN SAME JOB AS TURNER AND GETTING SALARY IN RANGE OF 1000 TO 5000 AND HIRED AFTER 1960 AND NOT GETTING COMMISSION ?
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMP
+  2  WHERE JOB = (SELECT JOB FROM EMP WHERE ENAME ='TURNER') AND SAL BETWEEN  1000 AND 5000 AND
+  3  HIREDATE >'31-DEC-1960' AND COMM IS NULL;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --14] WRITE A QUERY TO DISPLAY HIREDATE WHICH ARE DUPLICATED IN EMP TABLE ?
+SQL> 
+SQL> SELECT COUNT(*), HIREDATE  FROM EMP GROUP BY HIREDATE HAVING COUNT(*) >1;
+
+  COUNT(*) HIREDATE                                                                                 
+---------- ---------                                                                                
+         2 03-DEC-81                                                                                
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --15]  WRITE A QUERY TO DISPLAY ENAME, SALARY, MGR, HIREDATE OF THE EMPLOYEES WHO ARE HAVING HIREDATE AND GETTING SALARY MORE THAN 2000 AND WORKING IN THE DEPTNO 10,20,30 AND THE EMPLOYEES NAME CONSIST OF S CHARACTER ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, SAL,MGR,HIREDATE
+  2  FROM EMP
+  3  WHERE HIREDATE IS NOT NULL AND SAL >2000 AND DEPTNO IN (10,20,30) AND ENAME LIKE '%S%';
+
+ENAME             SAL        MGR HIREDATE                                                           
+---------- ---------- ---------- ---------                                                          
+JONES            2975       7839 02-APR-81                                                          
+SCOTT            3000       7566 19-APR-87                                                          
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --16] WRITE A QUERY TO DISPLAY ENAME ,SALARY OF THE EMPLOYEE WHO ARE GETTING SALARY LESS THAN ALLEN BUT MORE THAN SALESMAN AND THE EMPLOYEE WHO ARE HAVING THE REPORTING MANAGER ?
+SQL> 
+SQL> SELECT ENAME, SAL FROM EMP
+  2  WHERE SAL < (SELECT SAL FROM EMP WHERE ENAME='ALLEN') AND
+  3  SAL > ALL (SELECT SAL FROM EMP WHERE JOB ='SALESMAN') AND MGR IS NOT NULL;
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --17]  WRITE A QUERY TO DISPLAY  TOTAL SALARY , MINIMUM SALARY , AVG SAL OF THE EMPLOYEES WHO ARE  HAVING REPORTING MANAGER AND NOT GETTING COMMISSION IN THE DEPTNO 10,20,30 ?
+SQL> 
+SQL> SELECT SUM(SAL), MIN(SAL), AVG(SAL) FROM EMP
+  2  WHERE  MGR IS NOT NULL AND COMM IS NULL AND DEPTNO IN (10,20,30) ;
+
+  SUM(SAL)   MIN(SAL)   AVG(SAL)                                                                    
+---------- ---------- ----------                                                                    
+     18425        800 2047.22222                                                                    
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --18]  WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEE WHO HAVING HIREDATE AND WORKING AS ANALYST , MANAGER, CLERK IN THE DEPTNO 10,20,30 ?
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMP
+  2  WHERE HIREDATE IS NOT NULL AND JOB IN ('ANALYST', 'MANAGER','CLERK') AND DEPTNO IN (10,20,30);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+9 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --19] WRITE A QUERY TO DISPLAY NAME OF THE EMPLOYEE WHOSE DNAME CONSIST OF CHARACTER A ?
+SQL> 
+SQL> SELECT ENAME FROM EMP
+  2  WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME LIKE '%A%');
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+ALLEN                                                                                               
+WARD                                                                                                
+JONES                                                                                               
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+SCOTT                                                                                               
+KING                                                                                                
+TURNER                                                                                              
+ADAMS                                                                                               
+JAMES                                                                                               
+FORD                                                                                                
+MILLER                                                                                              
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --20]  WRITE A QUERY TO DISPLAY EMPLOYEE NAME AND MANAGER NUMBER WHO ARE HAVING REPEATED MGR NO
+SQL> 
+SQL> SELECT ENAME, MGR FROM EMP
+  2  GROUP BY MGR HAVING COUNT(*) >1;
+SELECT ENAME, MGR FROM EMP
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> 
+SQL> 
+SQL> SELECT ENAME , MGR
+  2  FROM EMP
+  3  GROUP BY MGR
+  4  HAVING COUNT(*)>1;
+SELECT ENAME , MGR
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT ENAME, MGR
+  2  FROM EMP
+  3  WHERE MGR IN (
+  4      SELECT MGR
+  5      FROM EMP
+  6      GROUP BY MGR
+  7      HAVING COUNT(*) > 1
+  8  );
+
+ENAME             MGR                                                                               
+---------- ----------                                                                               
+CLARK            7839                                                                               
+BLAKE            7839                                                                               
+JONES            7839                                                                               
+JAMES            7698                                                                               
+TURNER           7698                                                                               
+MARTIN           7698                                                                               
+WARD             7698                                                                               
+ALLEN            7698                                                                               
+FORD             7566                                                                               
+SCOTT            7566                                                                               
+
+10 rows selected.
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --21] WRITE A QUERY TO DISPLAY THE DETAILS OF EMPLOYEE WHO ARE HAVING SAME SALARY AND WORKING IN SAME JOB ?
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMP
+  2  WHERE SAL IN (SELECT SAL FROM EMP GROUP BY SAL HAVING COUNT (*) >1) AND
+  3  JOB IN (SELECT JOB FROM EMP GROUP BY JOB HAVING COUNT(*) >1 );
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --22] WRITE A QUERY TO DISPLAY DETAILS OF THE EMPLOYEES WHO ARE GETTING COMMISSION AND GETTING SAME SALARY ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL AND SAL IN (SELECT SAL FROM EMP GROUP BY SAL HAVING COUNT(*)>1);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --23] WRITE A QUERY TO DISPLAY DNAME OF THE SCOTT ?
+SQL> 
+SQL> SELECT DNAME FROM DEPT
+  2  WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME ='SCOTT');
+
+DNAME                                                                                               
+--------------                                                                                      
+RESEARCH                                                                                            
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --24] WRITE A QUERY TO DISPLAY DNAME , LOC OF THE EMPLOYEES WHO ARE GETTING SALARY MORE THAN ALLEN ?
+SQL> 
+SQL> 
+SQL> SELECT DNAME, LOC FROM DEPT
+  2  WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE SAL >(SELECT SAL FROM EMP WHERE ENAME ='ALLEN'));
+WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE SAL >(SELECT SAL FROM EMP WHERE ENAME ='ALLEN'))
+                *
+ERROR at line 2:
+ORA-01427: single-row subquery returns more than one row 
+
+
+SQL>  SELECT DNAME, LOC FROM DEPT
+  2   WHERE DEPTNO IN  (SELECT DEPTNO FROM EMP WHERE SAL >(SELECT SAL FROM EMP WHERE ENAME ='ALLEN'));
+
+DNAME          LOC                                                                                  
+-------------- -------------                                                                        
+SALES          CHICAGO                                                                              
+RESEARCH       DALLAS                                                                               
+ACCOUNTING     NEW YORK                                                                             
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --25]  WRITE A QUERY TO DISPLAY
+SQL>  --ENAME SALARY OF THE EMPLOYEES WHO ARE GETTING SALARY MORE THAN ANALYST ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, SAL FROM EMP
+  2  WHERE SAL > ALL (SELECT SAL FROM EMP WHERE JOB IN 'ANALYST');
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+KING             5000                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --26]  WRITE A QUERY TO DISPLAY
+SQL> --DETAILS OF THE EMPLOYEES WHO ARE HIRED AFTER ALL SALESMAN ?
+SQL> 
+SQL> SELECT * FROM EMP WHERE HIREDATE > ALL (SELECT HIREDATE FROM EMP WHERE JOB IN 'SALESMAN');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --27] WRITE A QUERY TO DISPLAY
+SQL> -- DETAILS OF THE EMPLOYEES IF THERE ARE MORE THAN 10 EMPLOYEE IN THE TABLE ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE (SELECT COUNT(*) FROM EMP) > 10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> --28] WRITE A QUERY TO DISPLAY THE DETAILS OF THE EMPLOYEES IF THERE ARE MORE THAN 3 SALESMAN ARE PRESENT IN THE TABLE ?
+SQL> 
+SQL> 
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB IN 'SALESMAN'
+  4  GROUP BY JOB
+  5  HAVING COUNT(*) >3;
+SELECT *
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> 
+SQL> SELECT JOB
+  2    FROM EMP
+  3    WHERE JOB IN 'SALESMAN'
+  4    GROUP BY JOB
+  5    HAVING COUNT(*) >3;
+
+JOB                                                                                                 
+---------                                                                                           
+SALESMAN                                                                                            
+
+SQL> 
+SQL> SELECT * FROM EMP
+  2  WHERE JOB IN (SELECT JOB FROM EMP WHERE JOB ='SALESMAN' GROUP BY JOB HAVING COUNT(*)>3);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --29] WRITE A QUERY TO DISPLAY DNAME OF THE EMPLOYEES WHOSE NAME CONSIST OF CHARACTER A ?
+SQL> 
+SQL> SELECT DNAME
+  2  FROM DEPT
+  3  WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME LIKE '%A%');
+WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME LIKE '%A%')
+                *
+ERROR at line 3:
+ORA-01427: single-row subquery returns more than one row 
+
+
+SQL> 
+SQL> SELECT DNAME
+  2  FROM DEPT
+  3  WHERE DEPTNO IN (SELECT DEPTNO FROM EMP WHERE ENAME LIKE '%A%');
+
+DNAME                                                                                               
+--------------                                                                                      
+ACCOUNTING                                                                                          
+RESEARCH                                                                                            
+SALES                                                                                               
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --30] WRITE A QUERY TO DISPLAY ENAME , SALARY ,HIREDATE OF THE EMPLOYEES WHO ARE GETTING SALARY MORE THAN ALLEN IN ACCOUNTING DEPARTMENT ?
+SQL> 
+SQL> 
+SQL> SELECT ENAME, SAL, HIREDATE FROM EMP
+  2  WHERE SAL > (SELECT SAL FROM EMP WHERE ENAME ='ALLEN') AND
+  3  DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME ='ACCOUNTING');
+
+ENAME             SAL HIREDATE                                                                      
+---------- ---------- ---------                                                                     
+CLARK            2450 09-JUN-81                                                                     
+KING             5000 17-NOV-81                                                                     
+
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> --31] WRITE A QUERY TO DISPLAY DNAME OF THE EMPLOYEES WHO ARE HAVING SAME COMM AND SAME MGR NO ?
+SQL> 
+SQL> 
+SQL> SELECT D.DNAME
+  2  FROM EMP E, DEPT D
+  3  WHERE E.DEPTNO = D.DEPTNO
+  4  AND (E.COMM, E.MGR) IN
+  5      (SELECT COMM, MGR
+  6       FROM EMP
+  7       GROUP BY COMM, MGR
+  8       HAVING COUNT(*) > 1);
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> -----------------------------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> SPOOL OFF;
